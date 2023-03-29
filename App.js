@@ -1,26 +1,26 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from "react-native";
+import { useState } from "react";
+
+
+
 
 
 function Card(props) {
-  const RemoveButton = ({ onPress,}) => {
-    return (
-      <TouchableOpacity onPress={onPress}>
-        <Text>Remover</Text>
-      </TouchableOpacity>
-    );
-  }
+
   return (
     <View style={styles.card}>
       <Image style={styles.filme} source={{ uri: props.filme.capa }} />
       <Text style={{ color: "black" }}> {props.filme.titulo} </Text>
       <Text style={{ fontSize: 12 }}> Gênero: {props.filme.genero}</Text>
-      <RemoveButton onPress={props.removerID}/>
+      <Button title="Remover" onPress={props.onPress} />
     </View>
   );
 }
 
 export default function App() {
-  const Filmes = [
+ 
+
+  const [Filmes, setFilmes] = useState([
     {
       id: '1',
       capa: "https://img.melhoresfilmes.com.br/unsafe/320x480/https%3A%2F%2Fwww.melhoresfilmes.com.br%2Fstorage%2Fimgs%2Fposters%2F39711.jpg%3Ft%3D20230110104349",
@@ -53,23 +53,15 @@ export default function App() {
     },
     { 
       id: '6',
-      capa: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcThhjAv6Y9BKKrJyczESuQQwW7MSBJbWuWtUiN3e5MgEv5op-ZF",
+      capa: "https://encrypted-tbn2.gstatic.com/images?q=tbnI:ANd9GcThhjAv6Y9BKKrJyczESuQQwW7MSBJbWuWtUiN3e5MgEv5op-ZF",
       titulo: "A Queda",
       genero: "Suspense",
     },
-  ];
+  ]);
 
-  function removerID(id){
-    const index = Filmes.indexOf( id === id);
-    if (index !== -1){
-      Filmes.splice(index, 1);
-    }
-    // return Filmes;
+  function deleteObject(id) {
+    setFilmes(Filmes => Filmes.filter(filme => filme.id !== id));
   }
-
-   // funcao para remover da lista....
-  // find no lista pelo ID
-  // splice para remover o elemento
 
   return (
     <View>
@@ -78,7 +70,9 @@ export default function App() {
       </View>
       <View style={styles.conteudo}>
         {Filmes.map((filme) => (
-          <Card filme={filme} removerID={() => removerID(filme.id)}/>
+          <Card filme={filme} onPress={() => {
+            deleteObject(filme.id)
+          }}/>
         ))}
       </View>
     </View>
