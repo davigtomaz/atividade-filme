@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
+
 function Card(props) {
-  const RemoveButton = ({ onPress, item, onRemove }) => {
+  const RemoveButton = ({ onPress,}) => {
     return (
       <TouchableOpacity onPress={onPress}>
         <Text>Remover</Text>
@@ -13,7 +14,7 @@ function Card(props) {
       <Image style={styles.filme} source={{ uri: props.filme.capa }} />
       <Text style={{ color: "black" }}> {props.filme.titulo} </Text>
       <Text style={{ fontSize: 12 }}> Gênero: {props.filme.genero}</Text>
-      <RemoveButton  onPress={() => onRemove(Filmes.id) }/>
+      <RemoveButton onPress={props.removerID}/>
     </View>
   );
 }
@@ -58,7 +59,15 @@ export default function App() {
     },
   ];
 
-  // funcao para remover da lista....
+  function removerID(id){
+    const index = Filmes.indexOf( id === id);
+    if (index !== -1){
+      Filmes.splice(index, 1);
+    }
+    // return Filmes;
+  }
+
+   // funcao para remover da lista....
   // find no lista pelo ID
   // splice para remover o elemento
 
@@ -69,7 +78,7 @@ export default function App() {
       </View>
       <View style={styles.conteudo}>
         {Filmes.map((filme) => (
-          <Card filme={filme} onRemove={/*chmar a funcao que vc vai fazer passado o DI */}/>
+          <Card filme={filme} removerID={() => removerID(filme.id)}/>
         ))}
       </View>
     </View>
