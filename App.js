@@ -2,23 +2,19 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from "react-n
 import { useState } from "react";
 
 
-
-
-
 function Card(props) {
-
   return (
     <View style={styles.card}>
       <Image style={styles.filme} source={{ uri: props.filme.capa }} />
-      <Text style={{ color: "black" }}> {props.filme.titulo} </Text>
-      <Text style={{ fontSize: 12 }}> Gênero: {props.filme.genero}</Text>
+      <Text style={{ color: "white" }}> {props.filme.titulo} </Text>
+      <Text style={{ fontSize: 12, color: 'white' }}> Gênero: {props.filme.genero}</Text>
       <Button title="Remover" onPress={props.onPress} />
     </View>
   );
 }
 
 export default function App() {
- 
+
 
   const [Filmes, setFilmes] = useState([
     {
@@ -47,14 +43,14 @@ export default function App() {
     },
     {
       id: '5',
-      capa: "https://bibliotecaucs.files.wordpress.com/2019/06/como-eu-era-antes-de-vocc3aa.jpg",
-      titulo: "Como eu era antes de você",
-      genero: "Romance",
+      capa: "https://cdnim.prd.cineticket.com.br/asset/movie/7934/creed-iii-poster-desktop-4872c.jpg",
+      titulo: "Creed III",
+      genero: "Luta",
     },
-    { 
+    {
       id: '6',
-      capa: "https://encrypted-tbn2.gstatic.com/images?q=tbnI:ANd9GcThhjAv6Y9BKKrJyczESuQQwW7MSBJbWuWtUiN3e5MgEv5op-ZF",
-      titulo: "A Queda",
+      capa: "https://cdnim.prd.cineticket.com.br/asset/movie/7971/panico-vi-poster-desktop-4947c.jpg",
+      titulo: "Pânico VI",
       genero: "Suspense",
     },
   ]);
@@ -72,7 +68,7 @@ export default function App() {
         {Filmes.map((filme) => (
           <Card filme={filme} onPress={() => {
             deleteObject(filme.id)
-          }}/>
+          }} />
         ))}
       </View>
     </View>
@@ -95,7 +91,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   card: {
-    backgroundColor: "gray",
+    backgroundColor: "#0284c7",
     width: "40%",
     height: 200,
     borderRadius: 10,
@@ -110,8 +106,6 @@ const styles = StyleSheet.create({
   texto: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 100,
-    fontWeigth: "bold",
     paddingTop: "20%",
   },
 });
